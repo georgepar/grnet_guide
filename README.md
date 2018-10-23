@@ -46,7 +46,7 @@ After this the script loads the required modules. Modules are a way to dynamical
 
 caffe2/201809 is for pytorch. There are also some tensorflow modules. You can see all available modules if you run module avail.
 
-There is also the slp/0.1.0 module which loads some useful tools that did not exist in the system like nltk, gensim, librosa and ekphrasis, curtesy of @geopar.
+There is also the slp/0.1.0 module which loads some useful tools that did not exist in the system like nltk, gensim, librosa and ekphrasis, courtesy of @geopar.
 
 You normally won't need to change this section except if you want tensorflow.
 
