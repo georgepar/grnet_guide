@@ -86,7 +86,7 @@ As you know SLURM is a batch system and there is a job queue. This means that yo
 Here are some tips and tricks to jump the queue
 
 1. Don't spam jobs. This is not a development environment, it's a production one. Make sure your code runs correctly before submitting. There is some fair sharing built into the queue so if you spam, other users will jump before you.  
-2. Do not oversize your jobs. Just because you **can** request 256GB of RAM it doesn't mean you should. Have a basic knowledge of your actual HW  requirements.  
+2. Do not oversize your jobs. Just because you **can** request 256GB of RAM and 10 GPUs it doesn't mean you **should**. Have a basic knowledge of your actual HW  requirements.  
 3. Do not overestimate the time your job will need to complete. You should know how long it should take approximately. If it takes 3 hours, request 4-5 to be safe, not a week.
 
 ## Access
