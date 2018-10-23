@@ -16,8 +16,7 @@ organized.
 2. Create a source dir in /work2/pa18/geopar/${YOUR_NAME}. This is where your data are kept.
 3. scp or rsync your data in /work2/pa18/geopar/${YOUR_NAME}.
 
-As you read in the docs you are not supposed to run your jobs from /users. If you did not read this
-RTFM before continuing.
+As you read in the docs you are not supposed to run your jobs (data) from /users. All data should be in work2. If you did not read this RTFM before continuing.
 
 ## Step 2: Creating a batch job
 
