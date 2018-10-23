@@ -7,17 +7,18 @@
 #                                  #
 ####################################
 
-#SBATCH --job-name=test_job    # Job name
-#SBATCH --output=test_job.%j.out # Stdout (%j expands to jobId)
-#SBATCH --error=test_job.%j.err # Stderr (%j expands to jobId)
-#SBATCH --ntasks=1     # Number of tasks(processes)
-#SBATCH --nodes=1     # Number of nodes requested
-#SBATCH --ntasks-per-node=1     # Tasks per node
-#SBATCH --cpus-per-task=1     # Threads per task
-#SBATCH --time=0:01:00   # walltime
-#SBATCH --mem=1G   # memory per NODE
-#SBATCH --partition=gpu    # Partition
-#SBATCH --account=pa181004    # Replace with your system project
+#SBATCH --job-name=test_job    # DO NOT FORGET TO CHANGE THIS
+#SBATCH --output=test_job.%j.out # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --error=test_job.%j.err # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --ntasks=1     # How many times the command will run. Leave this to 1 unless you know what you are doing
+#SBATCH --nodes=1     # The task will break in so many nodes. Use this if you need many GPUs
+#SBATCH --gres=gpu:1 # GPUs per node to be allocated
+#SBATCH --ntasks-per-node=1     # Same as ntasks
+#SBATCH --cpus-per-task=1     # If you need multithreading
+#SBATCH --time=0:01:00   # HH:MM:SS Estimated time the job will take. It will be killed if it exceeds the time limit
+#SBATCH --mem=1G   # memory to be allocated per NODE
+#SBATCH --partition=gpu    # gpu: Job will run on one or more of the nodes in gpu partition. ml: job will run on the ml node
+#SBATCH --account=pa181004    # DO NOT CHANGE THIS
 
 export I_MPI_FABRICS=shm:dapl
 
