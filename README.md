@@ -96,3 +96,23 @@ Here are some tips and tricks to jump the queue
 2. Send your ssh key to @geopar and he will grant you access. If you have read the docs. There will be an exam.
 
 
+## How to install a dependency
+
+1. Send a mail to support  
+2. If this fails, notify geopar  
+3. DIY  
+```bash
+git clone http://github.com/<vendor>/my_repo
+cd my_repo
+module purge # clean up loaded modules 
+# load necessary modules
+module use ${HOME}/modulefiles
+module load gnu/6.4.0
+module load intel/19.0.0
+module load openblas/0.2.20
+module load cuda/9.2.148 
+module load caffe2/201809
+module load slp/0.1.0
+pip install . --prefix /users/pa18/geopar/packages/python/
+
+```
