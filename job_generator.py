@@ -99,7 +99,7 @@ srun python {command}
 
 runner = header + body + footer
 
-write_approval = query_yes_no(f"IS THE GENERATED SCRIPT OK? " + "=" * 50 +
+write_approval = query_yes_no(f"IS THE GENERATED SCRIPT OK? \n\n" + "=" * 50 +
                               f"\n\n\n {runner}", default="no")
 
 if write_approval:
