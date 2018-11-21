@@ -51,9 +51,9 @@ header = """
 #                                  #
 ####################################
 
-#SBATCH --job-name={}    # DO NOT FORGET TO CHANGE THIS
-#SBATCH --output={}.%j.out # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
-#SBATCH --error={}.%j.err # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --job-name={0}    # DO NOT FORGET TO CHANGE THIS
+#SBATCH --output={1}.%j.out # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --error={2}.%j.err # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
 #SBATCH --ntasks=1     # How many times the command will run. Leave this to 1 unless you know what you are doing
 #SBATCH --nodes=1     # The task will break in so many nodes. Use this if you need many GPUs
 #SBATCH --gres=gpu:1 # GPUs per node to be allocated
@@ -93,24 +93,24 @@ module load slp/0.1.0
 footer = """
 
 ## RUN YOUR PROGRAM ##
-srun python {}
+srun python {0}
 
 """.format(command)
 
 runner = header + body + footer
 
 write_approval = query_yes_no("IS THE GENERATED SCRIPT OK? \n\n" + "=" * 50 +
-                              "\n\n\n {}".format(runner), default="no")
+                              "\n\n\n {0}".format(runner), default="no")
 
 if write_approval:
-    with open("{}.sh".format(job_name), "w") as f:
+    with open("{0}.sh".format(job_name), "w") as f:
         f.write(header + body + footer)
 
-    ex_approval = query_yes_no("Execute the job '{}' ?".format(job_name),
+    ex_approval = query_yes_no("Execute the job '{0}' ?".format(job_name),
                                default="no")
 
     if ex_approval:
-        os.system("sbatch {}.sh".format(job_name))
+        os.system("sbatch {0}.sh".format(job_name))
 
 else:
     print("Exiting...")
