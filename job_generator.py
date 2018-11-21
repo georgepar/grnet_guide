@@ -41,8 +41,7 @@ def query_yes_no(question, default="yes"):
 job_name = sys.argv[1]
 command = ' '.join(sys.argv[2:])
 
-header = """
-#!/bin/bash
+header = """#!/bin/bash
 
 ####################################
 #     ARIS slurm script template   #
