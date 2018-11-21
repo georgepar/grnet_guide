@@ -25,7 +25,7 @@ def query_yes_no(question, default="yes"):
 
     while True:
         sys.stdout.write(question + prompt)
-        choice = input().lower()
+        choice = raw_input().lower()
         if default is not None and choice == '':
             return valid[default]
         elif choice in valid:
@@ -41,7 +41,7 @@ def query_yes_no(question, default="yes"):
 job_name = sys.argv[1]
 command = ' '.join(sys.argv[2:])
 
-header = f"""
+header = """
 #!/bin/bash
 
 ####################################
@@ -51,9 +51,9 @@ header = f"""
 #                                  #
 ####################################
 
-#SBATCH --job-name={job_name}    # DO NOT FORGET TO CHANGE THIS
-#SBATCH --output={job_name}.%j.out # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
-#SBATCH --error={job_name}.%j.err # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --job-name={}    # DO NOT FORGET TO CHANGE THIS
+#SBATCH --output={}.%j.out # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
+#SBATCH --error={}.%j.err # DO NOT FORGET TO CHANGE THIS. the job stdout will be dumped here. (%j expands to jobId).
 #SBATCH --ntasks=1     # How many times the command will run. Leave this to 1 unless you know what you are doing
 #SBATCH --nodes=1     # The task will break in so many nodes. Use this if you need many GPUs
 #SBATCH --gres=gpu:1 # GPUs per node to be allocated
@@ -63,7 +63,7 @@ header = f"""
 #SBATCH --mem=32G   # memory to be allocated per NODE
 #SBATCH --partition=gpu    # gpu: Job will run on one or more of the nodes in gpu partition. ml: job will run on the ml node
 #SBATCH --account=pa181004    # DO NOT CHANGE THIS
-"""
+""".format(job_name, job_name, job_name)
 
 body = """
 
@@ -90,26 +90,27 @@ module load slp/0.1.0
 
 """
 
-footer = f"""
+footer = """
 
 ## RUN YOUR PROGRAM ##
-srun python {command}
+srun python {}
 
-"""
+""".format(command)
 
 runner = header + body + footer
 
-write_approval = query_yes_no(f"IS THE GENERATED SCRIPT OK? \n\n" + "=" * 50 +
-                              f"\n\n\n {runner}", default="no")
+write_approval = query_yes_no("IS THE GENERATED SCRIPT OK? \n\n" + "=" * 50 +
+                              "\n\n\n {}".format(runner), default="no")
 
 if write_approval:
-    with open(f"{job_name}.sh", "w") as f:
+    with open("{}.sh".format(job_name), "w") as f:
         f.write(header + body + footer)
 
-    ex_approval = query_yes_no(f"Execute the job '{job_name}' ?", default="no")
+    ex_approval = query_yes_no("Execute the job '{}' ?".format(job_name),
+                               default="no")
 
     if ex_approval:
-        os.system(f"sbatch {job_name}.sh")
+        os.system("sbatch {}.sh".format(job_name))
 
 else:
     print("Exiting...")
