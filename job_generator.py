@@ -80,12 +80,14 @@ module purge            # clean up loaded modules
 
 # load necessary modules
 module use ${HOME}/modulefiles
-module load gnu/6.4.0
-module load intel/19.0.0
-module load openblas/0.2.20
-module load cuda/9.2.148
-module load caffe2/201809
-module load slp/0.1.0
+module load gnu/8.3.0
+module load intel/18.0.5
+module load intelmpi/2018.5
+module load cuda/10.1.168
+module load python/3.6.5
+module load pytorch/1.3.1
+module load slp/1.3.1
+
 
 """
 
